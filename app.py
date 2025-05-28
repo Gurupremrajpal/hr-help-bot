@@ -18,11 +18,7 @@ def webhook():
 
     if incoming_msg.lower() == 'hi':
         session = {'step': 1}
-        msg.body("👋 Welcome to HR Dost!
-Please choose an option:
-
-Apply for Visiting Card
-(Type 1)")
+        msg.body("👋 Welcome to HR Dost!\nPlease choose an option:\n\nApply for Visiting Card\n(Type 1)")
 
     elif session['step'] == 1 and incoming_msg == '1':
         session['step'] = 2
@@ -37,19 +33,11 @@ Apply for Visiting Card
         session['emp_no'] = incoming_msg
         session['step'] = 4
         msg.body(
-            "✅ Your visiting card request is ready.
-
-"
-            "🎯 Final Step — Choose how to send your request:
-
-"
-            "A – Outlook Web (opens auto-filled email in browser)
-"
-            "B – Copy-paste email text into your Outlook app
-"
-            "C – Open default email app (Outlook must be default)
-
-"
+            "✅ Your visiting card request is ready.\n\n"
+            "🎯 Final Step — Choose how to send your request:\n\n"
+            "A – Outlook Web (opens auto-filled email in browser)\n"
+            "B – Copy-paste email text into your Outlook app\n"
+            "C – Open default email app (Outlook must be default)\n\n"
             "Please reply with A, B, or C to continue."
         )
 
@@ -70,38 +58,25 @@ Apply for Visiting Card
                 f"&body={email_body}"
             )
             msg.body(
-                "📢 Make sure you are logged in to Outlook Web in your browser.
-"
-                "If already logged in, please click the link below to send your email:
-
-"
+                "📢 Make sure you are logged in to Outlook Web in your browser.\n"
+                "If already logged in, please click the link below to send your email:\n\n"
                 f"🔗 {outlook_link}"
             )
 
         elif choice == 'B':
             email_text = (
-                "📋 Copy the text below and paste it in your Outlook app:
-
-"
-                "To: hnihr@bajajbroking.in
-"
-                "CC: employeesupport@bajajbroking.in, rajnikant.tiwari@bajajbroking.in, jahnavi.sharma@bajajbroking.in
-"
-                "Subject: Request for Visiting Card
-
-"
-                "I would like to apply for visiting card.
-"
-                f"Name: {name}
-"
+                "📋 Copy the text below and paste it in your Outlook app:\n\n"
+                "To: hnihr@bajajbroking.in\n"
+                "CC: employeesupport@bajajbroking.in, rajnikant.tiwari@bajajbroking.in, jahnavi.sharma@bajajbroking.in\n"
+                "Subject: Request for Visiting Card\n\n"
+                "I would like to apply for visiting card.\n"
+                f"Name: {name}\n"
                 f"Employee Number: {emp_no}"
             )
             msg.body(email_text)
 
         elif choice == 'C':
-            mail_body = f"I would like to apply for visiting card.
-Name: {name}
-Employee Number: {emp_no}"
+            mail_body = f"I would like to apply for visiting card.\nName: {name}\nEmployee Number: {emp_no}"
             mailto_link = (
                 "mailto:hnihr@bajajbroking.in"
                 "?cc=employeesupport@bajajbroking.in,rajnikant.tiwari@bajajbroking.in,jahnavi.sharma@bajajbroking.in"
@@ -109,9 +84,7 @@ Employee Number: {emp_no}"
                 f"&body={quote(mail_body)}"
             )
             msg.body(
-                "⚠️ If your default email app is NOT Outlook, please choose Option A or B instead.
-
-"
+                "⚠️ If your default email app is NOT Outlook, please choose Option A or B instead.\n\n"
                 f"🔗 {mailto_link}"
             )
         else:

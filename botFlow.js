@@ -1,6 +1,11 @@
 const userState = {};
 
 async function handleMessage(from, message) {
+  // Reset if user types "Hi"
+  if (message.toLowerCase() === "hi") {
+    userState[from] = { step: 0 };
+  }
+
   if (!userState[from]) {
     userState[from] = { step: 0 };
   }
